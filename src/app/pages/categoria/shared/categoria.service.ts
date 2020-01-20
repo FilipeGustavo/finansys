@@ -10,7 +10,7 @@ import { element } from 'protractor';
 })
 export class CategoriaService {
 
-  private apiPath: string = 'api/categias';
+  private apiPath: string = 'api/categorias';
 
   constructor(private http: HttpClient) { }
 
