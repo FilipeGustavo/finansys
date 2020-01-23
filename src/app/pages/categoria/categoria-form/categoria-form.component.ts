@@ -6,6 +6,7 @@ import { Categoria } from '../shared/categoria.model';
 import { CategoriaService } from '../shared/categoria.service';
 import { switchMap } from 'rxjs/operators';
 import toastr from 'toastr';
+import { error } from 'util';
 
 
 
@@ -38,6 +39,53 @@ export class CategoriaFormComponent implements OnInit, AfterContentChecked {
 
   ngAfterContentChecked() {
     this.setPageTitle();
+  }
+
+  submitForm() {
+    this.submittingForm = true;
+
+    if (this.currentAction === 'new') {
+      this.createCategory();
+    } else {
+      this.updateCategory();
+    }
+  }
+
+  private createCategory() {
+    const category: Categoria = Object.assign(new Categoria(), this.categoryForm.value);
+
+    this.categoryService.create(category).subscribe(
+      res => this.actionsForSuccess(res),
+      error => this.actionsForError(error)
+    );
+  }
+
+  private updateCategory() {
+    const category: Categoria = Object.assign(new Categoria(), this.categoryForm.value);
+    this.categoryService.update(category).subscribe(
+      res => this.actionsForSuccess(res),
+      error => this.actionsForError(error)
+    );
+  }
+
+  private actionsForSuccess(category: Categoria) {
+    toastr.success('Solicitação processada com sucesso.');
+
+    this.router.navigateByUrl('categorias', { skipLocationChange: true }).then(
+      () => this.router.navigate(['categorias', category.id, 'edit'])
+    );
+  }
+
+  private actionsForError(error: any) {
+    toastr.error('Ocorreu um erro ao processar a sua solicitação');
+
+    this.submittingForm = false;
+
+    if (error.status === 422) {
+      this.serverErrorMessages = JSON.parse(error._body).errors;
+    } else {
+      this.serverErrorMessages = ['Falha na comunicação com o servidor. Por favor tente mais tarde.'];
+    }
   }
 
   setPageTitle() {
