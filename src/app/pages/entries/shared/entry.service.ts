@@ -10,7 +10,7 @@ import { element } from 'protractor';
 })
 export class EntryService {
 
-  private apiPath: string = 'api/Entrys';
+  private apiPath: string = 'api/entries';
 
   constructor(private http: HttpClient) { }
 
@@ -54,7 +54,10 @@ export class EntryService {
 
   private jsonDataToEntries(jsonData: any[]): Entry[] {
     const Entrys: Entry[] = [];
-    jsonData.forEach(element => Entrys.push(element as Entry));
+    jsonData.forEach(element => {
+      const entry = Object.assign(new Entry(), element);
+      Entrys.push(entry);
+    });
     return Entrys;
   }
 
