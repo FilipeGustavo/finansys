@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EntryService } from '../shared/entry.service';
-import { Entry } from '../shared/entry.module';
+import { Entry } from '../shared/entry.model';
 import { error } from 'protractor';
 
 @Component({

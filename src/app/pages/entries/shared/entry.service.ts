@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, flatMap } from 'rxjs/operators';
-import { Entry } from './entry.module';
+import { Entry } from './entry.model';
 import { element } from 'protractor';
 
 @Injectable({
