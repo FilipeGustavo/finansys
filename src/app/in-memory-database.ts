@@ -1,6 +1,7 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { from } from 'rxjs';
 import { Categoria } from './pages/categoria/shared/categoria.model';
+import { Entry } from './pages/entries/shared/entry.model';
 
 export class InMemoryDatabase implements InMemoryDbService {
 
@@ -13,7 +14,13 @@ export class InMemoryDatabase implements InMemoryDbService {
             {id: 5, name: 'Freelas', description: 'Trabalhos como freelancer'},
         ];
 
-        return { categorias };
+        const entries: Entry[] = [
+            {id: 1, name: 'Gás de Cozinha', categoryId: categorias[0].id, category: categorias[0], paid: true, date: '14/10/2018', amount: '70,80', type: 'expense', description: 'Qualquer descrição para essa despesa'} as Entry,
+            {id: 2, name: 'Suplementos', categoryId: categorias[1].id, category: categorias[1], paid: true, date: '14/10/2018', amount: '15,80', type: 'expense', description: 'Qualquer descrição para essa despesa'} as Entry,
+            {id: 3, name: 'Sálario da Empresa X', categoryId: categorias[4].id, category: categorias[4], paid: true, date: '01/10/2018', amount: '3000,80', type: 'revenue', description: 'Qualquer descrição para essa despesa'} as Entry
+        ];
+
+        return { categorias, entries };
     }
 
 }
