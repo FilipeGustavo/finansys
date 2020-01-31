@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 import { RelatorioRoutingModule } from './relatorio-routing.module';
+import { RelatorioComponent } from './relatorio/relatorio.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [RelatorioComponent],
   imports: [
-    CommonModule,
-    RelatorioRoutingModule
+    SharedModule,
+    RelatorioRoutingModule,
   ]
 })
 export class RelatorioModule { }
