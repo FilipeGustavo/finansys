@@ -5,7 +5,10 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { path: 'categorias', loadChildren: './pages/categoria/categoria.module#CategoriaModule' },
   { path: 'lancamentos', loadChildren: './pages/entries/entries.module#EntriesModule' },
-  { path: 'relatorios', loadChildren: './pages/relatorio/relatorio.module#RelatorioModule' }
+  { path: 'relatorios', loadChildren: './pages/relatorio/relatorio.module#RelatorioModule' },
+
+
+  { path: '', redirectTo: '/relatorios', pathMatch: 'full' }
 ];
 
 @NgModule({
